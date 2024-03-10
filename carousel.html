@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carousel</title>
+    <link rel="stylesheet" href="/reset.css">
+    <style>
+        .section { 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%,-50%); 
+            display: block; 
+            width: 500px;
+            height: 500px; 
+            border: 1px solid #000;
+        }
+
+        label {
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0 0 10px ;
+            padding: 10px 20px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <label for="file">파일업로드</label>
+    <input hidden type="file" id="file" multiple accept="image/gif, image/jpeg, image/png">
+
+    <div class="section"></div>
+
+    <script src="/carousel.js"></script>
+    <script>
+        const element = document.querySelector(".section");
+
+        let Carousel = new CarouselSlide(element);
+
+        const input = document.getElementById("file");
+
+        input.addEventListener("change",(e) => {
+            
+            const self = e.currentTarget;
+            
+            const files = self.files;
+            console.log("files",files)
+            for(let i = 0; i < files.length; i++){
+                Carousel.createItem(files[i])
+            }
+        })
+    </script>
+</body>
+</html>
