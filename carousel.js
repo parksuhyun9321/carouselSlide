@@ -1,4 +1,4 @@
-/** ver. 1 */
+/** ver. 2 */
 
 class CarouselSlide {
     constructor(element){
@@ -115,9 +115,7 @@ class CarouselSlide {
             this.setPagination(); 
 
             /** 다음, 이전 슬라이드 이동 버튼이 없을때 */
-            if(!this.btnNext && !this.btnPrev) {
-                this.setSlideNavi();
-            }
+            if(!this.btnNext && !this.btnPrev) this.setSlideNavi();
 
             /** 다음, 이전 슬라이드 이동 버튼이 있을때 활성화 / 비활성화 설정 */
             this.setSlideNaviActive();
@@ -431,13 +429,14 @@ class CarouselSlide {
         btn.value = name;
 
         btn.style.position = "absolute";
-        btn.style.top = 0;
-        btn.style.right = 0;
+        btn.style.top = "10px";
+        btn.style.right = "10px";
 
-        btn.style.display = "block";
-        btn.style.width = "15px";
-        btn.style.height = "15px";
-        btn.style.backgroundColor = "#f0f"  ;
+        btn.style.display = "inline-block";
+        btn.style.padding = "5px 15px";
+        btn.style.border = "1px solid #000";
+        btn.style.cursor = "pointer";
+        btn.textContent = "삭제";
         
         const callback = this.btnDeleteEvent.bind(this);
 
@@ -491,13 +490,26 @@ class CarouselSlide {
      * 페이지네이션, 다음, 이전화 버튼 삭제
      */
     naviReset(){
-        document.querySelectorAll("[data-slide-navi]").forEach(el => el.remove());
+        
+        if(this.paginationInner) {
+            this.paginationInner.remove();
 
-        this.btnNext = null;
-        this.btnPrev = null;
+            let timer = setTimeout(() => {
+                this.paginationInner = null;    
+                timer = null;
+            }, 0);
+        }
 
-        this.paginationInner.remove();
-        this.paginationInner = null;
+        if(this.btnNext) {
+            this.btnNext.remove();
+            this.btnNext = null;
+        }
+
+        if(this.btnPrev) {
+            this.btnPrev.remove();
+            this.btnPrev = null;
+        }
+        
     }
 
     /**

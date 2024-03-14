@@ -1,4 +1,4 @@
-# carouselSlide
+# carouselSlide ver. 2
 
 20240310 psh
  
@@ -28,3 +28,10 @@ ex)
       new CarouselSlide(section)
     </script>
    
+
+
+20240314 psh 
+
+ - 슬라이드 아이템 삭제후 한개만 남을시 페이지네이션 버튼 삭제 안되는 이슈 수정
+
+ - 슬라이드 아이템 삭제 버튼 UI 수정
