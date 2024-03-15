@@ -469,14 +469,6 @@ class CarouselSlide {
 
         this.maxIdx = (this.maxIdx - 1) < 0 ? 0 : this.maxIdx - 1;
         this.slideIdx = (this.slideIdx - 1) < 0 ? 0 : this.slideIdx - 1;
-        
-        if(this.maxIdx === 0) this.naviReset();
-
-        if(this.data.length === 0) return this.nullItem();
-
-        this.setPagination();
-
-        this.setSlideNaviActive();
 
         let timer = setTimeout(() => {
             this.slideInner.style.transition = "0.25s ease";    
@@ -484,6 +476,14 @@ class CarouselSlide {
             clearTimeout(timer);
             timer = null;
         }, 0);
+        
+        if(this.maxIdx === 0) return this.naviReset();
+
+        if(this.data.length === 0) return this.nullItem();
+
+        this.setPagination();
+
+        this.setSlideNaviActive();
     }
 
     /**
@@ -493,11 +493,7 @@ class CarouselSlide {
         
         if(this.paginationInner) {
             this.paginationInner.remove();
-
-            let timer = setTimeout(() => {
-                this.paginationInner = null;    
-                timer = null;
-            }, 0);
+            this.paginationInner = null;
         }
 
         if(this.btnNext) {
