@@ -476,10 +476,10 @@ class CarouselSlide {
             clearTimeout(timer);
             timer = null;
         }, 0);
+
+        if(this.data.length === 0) this.nullItem();
         
         if(this.maxIdx === 0) return this.naviReset();
-
-        if(this.data.length === 0) return this.nullItem();
 
         this.setPagination();
 
